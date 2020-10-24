@@ -28,8 +28,12 @@ def scrapeOffer(driverPath, url):
     pickle.dump(jobOffers, open("listNewOffers.pickle", "wb"))
 
 def checkNewOffer():
-    #Load yesterday's offers
-    listOldOffers = pickle.load(open("listOldOffers.pickle", "rb"))
+    #Load yesterday's offers the scraper has already been run
+    try:
+        listOldOffers = pickle.load(open("listOldOffers.pickle", "rb"))
+    except:
+        print("listOldOffers couldn't be found. it's normal if you use the function for the first time")
+        listOldOffers = []
 
     #Load today's offers
     listNewOffers = np.array(pickle.load(open("listNewOffers.pickle", "rb")))
